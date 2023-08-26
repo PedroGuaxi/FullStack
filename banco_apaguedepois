@@ -1,0 +1,14 @@
+CREATE TABLE user_type(
+  id PRIMARY KEY AUTOINCREMENT not NULL
+  name varchar(100)
+)
+
+CREATE TABLE user(
+  name varchar(100)
+  email varchar(100)
+  user_type_id FOREIGN KEY 
+  password varchar(100)
+  is_active bool
+  cpf_cnpj varchar(14) UNIQUE NOT NULL
+  phone varchar(12)
+)
