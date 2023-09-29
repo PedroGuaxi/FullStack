@@ -4,15 +4,21 @@
     <title>Formulário HTML</title>
   </head>
   <body>
-    <h1>Formulário HTML</h1>
-    <form id="meuFormulario" action="/submit" method="post">
-      <label for="nome">Nome:</label><br />
-      <input type="text" id="nome" name="nome" /><br />
-      <!-- Adicionando um botão para enviar o formulário -->
-      <button type="button" onclick="enviarFormulario()">Enviar</button>
-    </form>
-    <p>{{ mensagem }}</p>
-
+    <h1>Lista de usuários:</h1>
+    <div>
+    <ul>
+      {% for item in mensagem %}
+      <li>{{ item[0] }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div>
+    <ul>
+      {% for item in mensagem %}
+      <li>{{ item[1] }}</li>
+      {% endfor %}
+    </ul>
+  </div>
     <script>
       function enviarFormulario() {
         var formulario = document.getElementById('meuFormulario')

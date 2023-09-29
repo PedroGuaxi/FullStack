@@ -12,11 +12,7 @@ def index():
 def submit():
     nome = request.form['name']
     password = request.form['password']    
-    teste = database.show_all()  
-
-    print(len(teste))
-    for itens in teste:
-        print(itens)
-    return render_template('teste.html', mensagem=teste)  
+    mensagem = database.show_all()  
+    return render_template('teste.html',mensagem=mensagem)  
 if __name__ == '__main__':
     app.run(debug=True)
