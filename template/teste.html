@@ -4,21 +4,22 @@
     <title>Formulário HTML</title>
   </head>
   <body>
+    <p>{{ mensagem }}</p>
     <h1>Lista de usuários:</h1>
     <div>
-    <ul>
-      {% for item in mensagem %}
-      <li>{{ item[0] }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div>
-    <ul>
-      {% for item in mensagem %}
-      <li>{{ item[1] }}</li>
-      {% endfor %}
-    </ul>
-  </div>
+      <ul>
+        {% for item in mensagem %}
+        <li>{{ item[0] }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <ul>
+        {% for item in mensagem %}
+        <li>{{ item[1] }}</li>
+        {% endfor %}
+      </ul>
+    </div>
     <script>
       function enviarFormulario() {
         var formulario = document.getElementById('meuFormulario')
