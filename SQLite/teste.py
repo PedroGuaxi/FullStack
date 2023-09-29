@@ -18,3 +18,4 @@ import database, sqlite3
 #                is_active DATATYPE integer 
 # )
 # """)
+print(database.show_all_labs())

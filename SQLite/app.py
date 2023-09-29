@@ -25,16 +25,24 @@ def update_users():
 def delete_users(): 
     users = database.show_all()
     return render_template('delete_user.html',mensagem=users)
-
-@app.route('/cadastro/lab')
-def cadastro_lab(): 
-    return render_template('cadastro_lab.html')
-
 @app.route('/unable_users')
 def unable_users(): 
     users = database.show_all()
     return render_template('desativar_usuario.html',mensagem=users)
 
+@app.route('/cadastro/lab')
+def cadastro_lab(): 
+    return render_template('cadastro_lab.html')
+
+@app.route('/update_labs')
+def update_labs(): 
+    labs = database.show_all_labs()
+    return render_template('update_labs.html',mensagem=labs)
+
+@app.route('/delete_labs')
+def delete_labs(): 
+    labs = database.show_all_labs()
+    return render_template('delete_labs.html',mensagem=labs)
 
 #CRUD USER
 @app.route('/submit/cadastro', methods=['POST'])
@@ -110,29 +118,31 @@ def submit_cadastro_lab():
     return render_template('teste.html',mensagem=lab)
 
 @app.route('/submit/read_labs')
-def submit_read_labss():
+def submit_read_labs():
     lista_labs = database.show_all_labs()
     view_lista_labs =[]
-    for itens in lista_labs:
-        view_lista_labs.append(itens[2])
-    return render_template('consultar_usuarios.html',mensagem=view_lista_labs)
+    print(lista_labs)
+    return render_template('consultar_labs.html',mensagem=lista_labs)
 
 @app.route('/submit/update_lab', methods=['POST'])
 def submit_update_lab():
     field = request.form['field']
     name = request.form['name']
     id = request.form['id']
-    print(id)
     lista = database.show_all_labs()
-    print('lista:', lista[1][1])
     for item in lista:
-        print('ITEM 0:',item[0],'\n')
-        print(item[1])
-        print(id)
-        if id == item[1]:
+        if id == item[2]:            
             id=item[0]
-    database.update_user(field,name,id)
+    database.update_lab(field,name,id)
     return render_template('teste.html',mensagem=name)
+
+@app.route('/submit/delete_labs', methods=['POST'])
+def submit_delete_labs():
+    id = request.form['id']
+    print(id)
+    lista = database.show_all()    
+    database.delete_lab(id)
+    return render_template('teste.html',mensagem=id)
 
 if __name__ == '__main__':
     app.run(debug=True)
