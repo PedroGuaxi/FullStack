@@ -1,10 +1,22 @@
 import database
+from flask import Flask, render_template, request
 
-#add a user
-#database.add_user('teste catacumbas','catacumbas@gmail.com','3','senha1','1','12412812312','9899999979')
-#delete a user
-#database.delete_user('3')
-#show all users
-database.update_user('email','pedro@gmail.com','2')
-database.show_all()
+app = Flask(__name__,template_folder='../template')
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    nome = request.form['name']
+    password = request.form['password']    
+    teste = database.show_all()  
+
+    print(len(teste))
+    for itens in teste:
+        print(itens)
+    return render_template('teste.html', mensagem=teste)  
+if __name__ == '__main__':
+    app.run(debug=True)

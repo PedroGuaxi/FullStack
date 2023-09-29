@@ -6,15 +6,13 @@ def show_all():
   #create a cursor
   cursor = conection.cursor()
   #query the database
-  cursor.execute("SELECT rowid,* FROM users")
+  cursor.execute("SELECT * FROM users")
   items = cursor.fetchall()
-  for item in items :
-      print(item)  
   #commit command show all users
   conection.commit()
   #close our connection
   conection.close()
-
+  return items
 def add_user(name,email,user_type_id,password,is_active,cpf_cnpj,phone):
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')
