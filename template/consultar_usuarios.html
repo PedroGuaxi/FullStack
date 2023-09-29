@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulário HTML</title>
+  </head>
+  <body>
+    <h1>Lista de usuários:</h1>
+    <div>
+      <ul>
+        {% for item in mensagem %}
+        <li>{{ item[1] }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <script>
+      function enviarFormulario() {
+        var formulario = document.getElementById('meuFormulario')
+        formulario.submit() // Envie o formulário quando o botão for clicado
+      }
+    </script>
+  </body>
+</html>
