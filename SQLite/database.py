@@ -11,15 +11,16 @@ def add_user(name,email,user_type_id,password,is_active,cpf_cnpj,phone):
   conection.commit()
   #close our connection
   conection.close()
-  
+
 def show_all():
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')
   #create a cursor
   cursor = conection.cursor()
   #query the database
-  cursor.execute("SELECT rowid, * FROM users")
+  cursor.execute("SELECT rowid, * FROM users WHERE is_active= 1 ")
   items = cursor.fetchall()
+  print(items)
   #commit command show all users
   conection.commit()
   #close our connection
@@ -57,7 +58,7 @@ def add_lab(andar,lab,description,is_active):
   #create a cursor
   cursor = conection.cursor()
   #inter a user in user table
-  cursor.execute("INSERT INTO users VALUES (?,?,?,?,?)",(andar,lab,description,is_active))
+  cursor.execute("INSERT INTO lab VALUES (?,?,?,?)",(andar,lab,description,is_active))
   #commit command create user
   conection.commit()
   #close our connection
