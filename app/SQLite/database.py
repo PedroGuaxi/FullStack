@@ -26,6 +26,20 @@ def show_all():
   #close our connection
   conection.close()
   return items
+def show_all_inactive():
+  #conection = sqlite3.connect(':memory:')
+  conection = sqlite3.connect('LabProject')
+  #create a cursor
+  cursor = conection.cursor()
+  #query the database
+  cursor.execute("SELECT rowid, * FROM users WHERE is_active= 0 ")
+  items = cursor.fetchall()
+  print(items)
+  #commit command show all users
+  conection.commit()
+  #close our connection
+  conection.close()
+  return items
 
 def update_user(field,name,id):
   #conection = sqlite3.connect(':memory:')
@@ -70,13 +84,30 @@ def show_all_labs():
   #create a cursor
   cursor = conection.cursor()
   #query the database
-  cursor.execute("SELECT rowid, * FROM lab")
+  cursor.execute("SELECT rowid, * FROM lab WHERE is_active=1")
   items = cursor.fetchall()
   #commit command show all users
   conection.commit()
   #close our connection
   conection.close()
   return items
+
+
+def show_all_labs_inactive():
+  #conection = sqlite3.connect(':memory:')
+  conection = sqlite3.connect('LabProject')
+  #create a cursor
+  cursor = conection.cursor()
+  #query the database
+  cursor.execute("SELECT rowid, * FROM lab WHERE is_active=0")
+  items = cursor.fetchall()
+  #commit command show all users
+  conection.commit()
+  #close our connection
+  conection.close()
+  return items
+
+
 def update_lab(field,name,id):
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')

@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
 
     <title>Deletar Usuário</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
@@ -37,13 +41,13 @@
       </nav>
     </header>
     <div class="container">
-      <div class="login-container">
-        <h1>Alterar dados do usuário</h1>
-        <form action="/submit/delete_labs" method="post">
+      <div class="disable-container">
+        <h1>Desativar Usuario</h1>
+        <form action="/submit/unable_users" method="post">
           <div class="dual">
             <div class="d">
               <label for="id"
-                ><h4><em>Qual o laboratório deseja deletar?</em></h4></label
+                ><h4><em>Qual o usuário deseja desativar?</em></h4></label
               >
               <select id="id" name="id">
                 {% for item in mensagem %}
@@ -52,7 +56,7 @@
               </select>
             </div>
           </div>
-          <button type="submit">Alterar</button>
+          <button type="submit">Desativar</button>
         </form>
       </div>
     </div>

@@ -11,8 +11,11 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-
-    <title>Painel Admin</title>
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
+    <title>Deletar Usuário</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
 
     <!-- Bootstrap core CSS -->
@@ -37,38 +40,23 @@
       </nav>
     </header>
     <div class="container">
-      <div class="user-container">
-        <h1>Opções USER</h1>
-        <form action="/cadastro">
-          <button type="submit">Criar usuarío</button>
-        </form>
-        <form action="/submit/read_users">
-          <button type="submit">Consultar usuaríos</button>
-        </form>
-        <form action="/update_users">
-          <button type="submit">Alterar dados do usuarío</button>
-        </form>
-        <form action="/delete_users">
-          <button type="submit">Deletar usuarío</button>
-        </form>
-        <form action="/unable_users">
-          <button type="submit">Desativar usuarío</button>
-        </form>
-      </div>
-
-      <div class="lab-container">
-        <h1>Opções LAB</h1>
-        <form action="/cadastro/lab">
-          <button type="submit">Criar laboratório</button>
-        </form>
-        <form action="/submit/read_labs">
-          <button type="submit">Consultar laboratório</button>
-        </form>
-        <form action="/update_labs">
-          <button type="submit">Alterar dados do laboratório</button>
-        </form>
-        <form action="/delete_labs">
-          <button type="submit">Deletar laboratório</button>
+      <div class="login-container">
+        <h1>Alterar dados do usuário</h1>
+        <form action="/submit/delete_users" method="post">
+          <div class="dual">
+            <div class="d">
+              <label for="id"
+                ><h4><em>Qual o usuário deseja deletar?</em></h4></label
+              >
+              <label for="id">Qual o usuarío? </label><br />
+              <select id="id" name="id">
+                {% for item in mensagem %}
+                <option value="{{item[0]}}">{{ item[1] }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <button type="submit">Alterar</button>
         </form>
       </div>
     </div>

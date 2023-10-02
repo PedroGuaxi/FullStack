@@ -2,7 +2,10 @@ body{
     background-color: #1f2122;
     font-family: 'Poppins', sans-serif;
 }
-
+li{
+    color: aliceblue;
+    text-align: center;
+}
 a{
     text-decoration: none;
     color: #ec6090;

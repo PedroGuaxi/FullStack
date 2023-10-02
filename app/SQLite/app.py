@@ -1,16 +1,24 @@
 import database
 from flask import Flask, render_template, request
 
-app = Flask(__name__,template_folder='../template')
+app = Flask(__name__,template_folder='../template', static_folder='../static')
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/painel_admin')
+@app.route('/painel_admin', methods=['POST'] )
 def painel_admin():
-    return render_template('painel.html')
+    users = database.show_all()
+    name = request.form['name']
+    password = request.form['password']
+    for item in users:
+        if item[1] == name and item[4] == password:
+            return render_template('painel.html')
+        else:
+            return render_template('index.html')
+    
 
 @app.route('/cadastro')
 def cadastro(): 
@@ -29,6 +37,19 @@ def delete_users():
 def unable_users(): 
     users = database.show_all()
     return render_template('desativar_usuario.html',mensagem=users)
+@app.route('/enable_users')
+def enable_users(): 
+    users = database.show_all_inactive()
+    return render_template('ativar_usuario.html',mensagem=users)
+
+@app.route('/unable_labs')
+def unable_labs(): 
+    users = database.show_all_labs()
+    return render_template('desativar_lab.html',mensagem=users)
+@app.route('/enable_labs')
+def enable_labs(): 
+    users = database.show_all_labs_inactive()
+    return render_template('ativar_lab.html',mensagem=users)
 
 @app.route('/cadastro/lab')
 def cadastro_lab(): 
@@ -94,11 +115,51 @@ def submit_delete_users():
     database.delete_user(id)
     return render_template('teste.html',mensagem=id)
 
+@app.route('/submit/unable_labs', methods=['POST'])
+def submit_unable_labs(): 
+    users = database.show_all_labs()
+    field = "is_active"
+    name = "0"
+    id = request.form['id']
+    for item in users:
+        if id == item[2]:
+            id=item[0]
+    database.update_lab(field,name,id)
+    print(users)
+    return render_template('teste.html',mensagem=users)
+
+
+@app.route('/submit/enable_labs', methods=['POST'])
+def submit_enable_labs(): 
+    users = database.show_all_labs_inactive()
+    field = "is_active"
+    name = "1"
+    id = request.form['id']
+    for item in users:
+        if id == item[2]:
+            id=item[0]
+    database.update_lab(field,name,id)
+    print(users)
+    return render_template('teste.html',mensagem=users)
+
 @app.route('/submit/unable_users', methods=['POST'])
 def submit_unable_users(): 
     users = database.show_all()
     field = "is_active"
     name = "0"
+    id = request.form['id']
+    for item in users:
+        if id == item[1]:
+            id=item[0]
+    database.update_user(field,name,id)
+    print(users)
+    return render_template('teste.html',mensagem=users)
+
+@app.route('/submit/enable_users', methods=['POST'])
+def submit_enable_users(): 
+    users = database.show_all_inactive()
+    field = "is_active"
+    name = "1"
     id = request.form['id']
     for item in users:
         if id == item[1]:

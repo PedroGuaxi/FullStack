@@ -3,16 +3,9 @@
   <head>
     <title>Formulário HTML</title>
   </head>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
   <body>
-    <p>{{ mensagem }}</p>
     <h1>Lista de usuários:</h1>
-    <div>
-      <ul>
-        {% for item in mensagem %}
-        <li>{{ item[0] }}</li>
-        {% endfor %}
-      </ul>
-    </div>
     <div>
       <ul>
         {% for item in mensagem %}

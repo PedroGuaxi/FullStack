@@ -1,6 +1,9 @@
-import database, sqlite3
-#create a table
-# 5 datatypes in SQLite : null(não existe), integer(number),real(decimal), text(texto),blob(mp3,image e etc.)
+# import database, sqlite3
+# #create a table
+# # 5 datatypes in SQLite : null(não existe), integer(number),real(decimal), text(texto),blob(mp3,image e etc.)
+# conection = sqlite3.connect('LabProject')
+# #create a cursor
+# cursor = conection.cursor()
 # cursor.execute("""CREATE TABLE users (
 #                name DATATYPE text ,
 #                email DATATYPE text ,
@@ -18,4 +21,7 @@ import database, sqlite3
 #                is_active DATATYPE integer 
 # )
 # """)
-print(database.show_all_labs())
+# # print(database.show_all_labs())
+# conection.commit()
+# #close our connection
+# conection.close()

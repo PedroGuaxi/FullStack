@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
 
     <title>Faculdade Uninove</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
@@ -42,7 +46,9 @@
         <form id="meuFormulario" action="/submit/update_users" method="post">
           <div class="dual">
             <div class="d">
-              <label for="field">Qual campo deseja alterar? </label><br />
+              <label for="field"
+                ><h4><em>Qual campo deseja alterar? </em></h4></label
+              ><br />
               <select id="field" name="field">
                 <option value="name">Nome</option>
                 <option value="email">Email</option>
