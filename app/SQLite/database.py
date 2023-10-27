@@ -40,7 +40,22 @@ def show_all_inactive():
   #close our connection
   conection.close()
   return items
-
+# def show_all_byuser(user_id):
+#   #conection = sqlite3.connect(':memory:')
+#   conection = sqlite3.connect('LabProject')
+#   #create a cursor
+#   cursor = conection.cursor()
+#   #query the database
+#   query="SELECT lab_id FROM reserva WHERE user_id= (?) "
+#   "UPDATE users SET "+field+"= (?) WHERE rowid = (?)"
+#   cursor.execute(query, (user_id))
+#   items = cursor.fetchall()
+#   print(items)
+#   #commit command show all users
+#   conection.commit()
+#   #close our connection
+#   conection.close()
+#   return items
 def update_user(field,name,id):
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')

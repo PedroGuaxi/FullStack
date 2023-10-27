@@ -105,3 +105,8 @@ form p{
 .dual{
     display: block;
 }
+
+button{
+    margin: 10px;
+    width: 139.587px;
+}

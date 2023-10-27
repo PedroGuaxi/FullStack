@@ -18,7 +18,23 @@ def painel_admin():
             return render_template('painel.html')
         else:
             return render_template('index.html')
-    
+        
+@app.route('/painel_users', methods=['GET'] )
+def painel_users():
+    # users = database.show_all()
+    # name = request.form['name']
+    # password = request.form['password']
+    # for item in users:
+    #     if item[1] == name and item[4] == password:
+    return render_template('painel_user.html')
+    #     else:
+            # return render_template('index.html')
+@app.route('/reservar/lab')
+def reservar_labs(): 
+    lista_labs = database.show_all_labs()
+    view_lista_labs =[]
+    print(lista_labs)
+    return render_template('reservar_labs.html',mensagem=lista_labs)
 
 @app.route('/cadastro')
 def cadastro(): 
@@ -204,6 +220,12 @@ def submit_delete_labs():
     lista = database.show_all()    
     database.delete_lab(id)
     return render_template('teste.html',mensagem=id)
-
+#Reserva LAB
+@app.route('/submit/read_labs_byuser')
+def submit_read_labs_byuser():
+    lista_labs = database.show_all_labs()
+    view_lista_labs =[]
+    print(lista_labs)
+    return render_template('consultar_labs.html',mensagem=lista_labs)
 if __name__ == '__main__':
     app.run(debug=True)

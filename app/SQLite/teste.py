@@ -2,7 +2,7 @@
 # #create a table
 # # 5 datatypes in SQLite : null(não existe), integer(number),real(decimal), text(texto),blob(mp3,image e etc.)
 # conection = sqlite3.connect('LabProject')
-# #create a cursor
+#create a cursor
 # cursor = conection.cursor()
 # cursor.execute("""CREATE TABLE users (
 #                name DATATYPE text ,
@@ -21,7 +21,14 @@
 #                is_active DATATYPE integer 
 # )
 # """)
-# # print(database.show_all_labs())
+
+# cursor.execute("""CREATE TABLE reserva (
+#                user_id DATATYPE integer ,
+#                lab_id DATATYPE integer ,
+#                date DATATYPE text              
+# )
+# """)
+# print(database.show_all_labs())
 # conection.commit()
-# #close our connection
+#close our connection
 # conection.close()
