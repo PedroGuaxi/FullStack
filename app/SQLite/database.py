@@ -41,7 +41,20 @@ def show_reserva():
   #close our connection
   conection.close()
   return items
-print(show_reserva())
+def show_users():
+  #conection = sqlite3.connect(':memory:')
+  conection = sqlite3.connect('LabProject')
+  #create a cursor
+  cursor = conection.cursor()
+  #query the database
+  cursor.execute("SELECT rowid, * FROM users")
+  items = cursor.fetchall()
+  print(items)
+  #commit command show all users
+  conection.commit()
+  #close our connection
+  conection.close()
+  return items
 def show_all_reserva():
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')
@@ -119,6 +132,7 @@ def createReserva (user_id,lab_id,date):
   conection.commit()
   #close our connection
   conection.close()
+
 def show_all_labs():
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')

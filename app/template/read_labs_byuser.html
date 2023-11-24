@@ -12,9 +12,9 @@
       rel="stylesheet"
     />
     <link
-    href="{{ url_for('static', filename='style.css') }}"
-    rel="stylesheet"
-  />
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
 
     <title>Cadastro Lab</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
@@ -47,7 +47,7 @@
           <div class="dual">
             <div class="d">
               <label for="andar"
-                ><h4><em>andar:</em></h4></label
+                ><h4><em>Qual laboratório deseja reservar? </em></h4></label
               >
               <select id="id" name="id">
                 {% for item in mensagem %}
@@ -70,7 +70,7 @@
               />
             </div>
           </div>
-                 
+
           <button type="submit">Cadastrar laboratório</button>
         </form>
       </div>

@@ -4,6 +4,7 @@ import requests
 import json
 
 app = Flask(__name__,template_folder='../template', static_folder='../static')
+user_name_now =''
 
 
 @app.route('/')
@@ -12,9 +13,10 @@ def index():
 
 @app.route('/painel_admin', methods=['POST'] )
 def painel_admin():
-    user = ""
     users = database.show_all()
     name = request.form['name']
+    global user_name_now
+    user_name_now = name
     password = request.form['password']
     for item in users:
         if item[1] == name and item[4] == password:
@@ -24,25 +26,6 @@ def painel_admin():
             return render_template('painel.html')
         else:
             return render_template('index.html')
-
-
-        
-@app.route('/painel_users', methods=['GET'] )
-def painel_users():
-    # users = database.show_all()
-    # name = request.form['name']
-    # password = request.form['password']
-    # for item in users:
-    #     if item[1] == name and item[4] == password:
-    return render_template('painel_user.html')
-    #     else:
-            # return render_template('index.html')
-@app.route('/reservar/lab')
-def reservar_labs(): 
-    lista_labs = database.show_all_labs()
-    view_lista_labs =[]
-    print(lista_labs)
-    return render_template('reservar_labs.html',mensagem=lista_labs)
 
 @app.route('/cadastro')
 def cadastro(): 
@@ -233,29 +216,41 @@ def submit_delete_labs():
     lista = database.show_all()    
     database.delete_lab(id)
     return render_template('desativar_lab.html',mensagem=id)
+
 #Reserva LAB
+@app.route('/reservar/labs')
+def reservar_labs():
+    lista_labs = database.show_all_labs()
+    lista_reservas = database.show_reserva()
+    view_lista_labs =[]
+    print("Lista de labs:\n", lista_labs)
+    print("Lista de reservas:\n", lista_reservas)
+
+    return render_template('read_labs_byuser.html',mensagem=lista_labs)
 @app.route('/read_labs_byuser')
 def submit_read_labs_byuser():
-    lista_labs = database.show_all_labs()
+    lista_reservas = database.show_reserva()
     view_lista_labs =[]
-    print(lista_labs)
-    return render_template('read_labs_byuser.html',mensagem=lista_labs)
+    print("Lista de reservas:\n", lista_reservas)
+    return render_template('read_labs_byuser.html',mensagem=lista_reservas)
 
 @app.route('/submit/reserva', methods=['POST'])
 def reserva():
-    # id_data = request.form['date']
-    id_lab = request.form['id']
-    # arq = open("user.txt", "r")
-    # user = arq.read()
-    # print(id_data, id_lab, arq)
-    # user.close()
+    global user_name_now
+    user_id =''
+    lista_users= database.show_users()
+    for i in lista_users:
+        if i[1] == user_name_now:
+            user_id= i[0]
+    lab_id = request.form['id']
+    boleto = "12345678"
+    data_reserva = request.form['date']
 
     url = "https://api-go-wash-efc9c9582687.herokuapp.com/api/pay-boleto"
-
     payload = json.dumps({
-    "user_id": 12,
-    "lab_id": 1,
-    "boleto": "12345678"
+    "user_id":user_id,
+    "lab_id": lab_id,
+    "boleto": boleto
     })
     headers = {
     'Content-Type': 'application/json',
@@ -268,7 +263,8 @@ def reserva():
     res = json.loads(response.text)
 
     if res["data"]["status"] == "approved":
-        database.createReserva(res["data"]["user_id"],id_lab,res["data"]["payment_date"])
+        database.createReserva(res["data"]["user_id"],lab_id,data_reserva)
+        print("\n\nreserva feita")
     else:
         return print("erro")
     
