@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
 
-    <title>Deletar Usuário</title>
+    <title>Deletar Laboratório</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
 
     <!-- Bootstrap core CSS -->
@@ -42,7 +42,6 @@
     </header>
     <div class="container">
       <div class="login-container">
-        <h1>Alterar dados do usuário</h1>
         <form action="/submit/delete_labs" method="post">
           <div class="dual">
             <div class="d">
@@ -51,12 +50,12 @@
               >
               <select id="id" name="id">
                 {% for item in mensagem %}
-                <option value="{{item[0]}}">{{ item[1] }}</option>
+                <option value="{{item[0]}}">{{ item[2] }}</option>
                 {% endfor %}
               </select>
             </div>
           </div>
-          <button type="submit">Alterar</button>
+          <button type="submit">Deletar</button>
         </form>
       </div>
     </div>

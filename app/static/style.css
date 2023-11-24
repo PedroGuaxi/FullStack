@@ -110,3 +110,14 @@ button{
     margin: 10px;
     width: 139.587px;
 }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    justify-content: center;
+  }
+
+  h2{
+
+    color:#35cf21
+  }

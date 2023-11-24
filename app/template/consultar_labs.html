@@ -9,12 +9,23 @@
   </head>
   <body>
     <h1>Lista de laboratórios:</h1>
-    <div>
-      <ul>
-        {% for item in mensagem %}
-        <li>{{ item[2]}}</li>
-        {% endfor %}
-      </ul>
+    <div class="wrapper">
+      <div>
+        <ul>
+          <li><h2>Laboratório</h2></li>
+          {% for item in mensagem %}
+          <li>{{ item[2]}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><h2>Status</h2></li>
+          {% for item in ativo %}
+          <li>{{item}}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </body>
 </html>

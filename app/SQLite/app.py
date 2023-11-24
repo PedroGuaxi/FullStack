@@ -100,7 +100,7 @@ def submit_cadastro():
     user_type_id= 0
     is_active= 1
     database.add_user(name,email,user_type_id,password,is_active,cpf_cnpj,phone)    
-    return render_template('teste.html',mensagem=name)
+    return render_template('cadastro.html',mensagem=name)
 
 @app.route('/submit/read_users', methods=['GET'])
 def submit_read_users():
@@ -123,7 +123,7 @@ def submit_update_users():
         if id == item[1]:
             id=item[0]
     database.update_user(field,name,id)
-    return render_template('teste.html',mensagem=name)
+    return render_template('update_users.html',mensagem=name)
 
 @app.route('/submit/delete_users', methods=['POST'])
 def submit_delete_users():
@@ -137,7 +137,7 @@ def submit_delete_users():
         if id == item[1]:
             id=item[0]
     database.delete_user(id)
-    return render_template('teste.html',mensagem=id)
+    return render_template('delete_user.html',mensagem=id)
 
 @app.route('/submit/unable_labs', methods=['POST'])
 def submit_unable_labs(): 
@@ -150,7 +150,7 @@ def submit_unable_labs():
             id=item[0]
     database.update_lab(field,name,id)
     print(users)
-    return render_template('teste.html',mensagem=users)
+    return render_template('desativar_lab.html',mensagem=users)
 
 
 @app.route('/submit/enable_labs', methods=['POST'])
@@ -164,7 +164,7 @@ def submit_enable_labs():
             id=item[0]
     database.update_lab(field,name,id)
     print(users)
-    return render_template('teste.html',mensagem=users)
+    return render_template('ativar_lab.html',mensagem=users)
 
 @app.route('/submit/unable_users', methods=['POST'])
 def submit_unable_users(): 
@@ -177,7 +177,7 @@ def submit_unable_users():
             id=item[0]
     database.update_user(field,name,id)
     print(users)
-    return render_template('teste.html',mensagem=users)
+    return render_template('desativar_usuario.html',mensagem=users)
 
 @app.route('/submit/enable_users', methods=['POST'])
 def submit_enable_users(): 
@@ -190,7 +190,7 @@ def submit_enable_users():
             id=item[0]
     database.update_user(field,name,id)
     #print(users)
-    return render_template('teste.html',mensagem=users)
+    return render_template('ativar_usuario.html',mensagem=users)
 
 #CRUD lab
 @app.route('/submit/cadastro/lab', methods=['POST'])
@@ -200,14 +200,19 @@ def submit_cadastro_lab():
     description= request.form['description']
     is_active='1'
     database.add_lab(andar,lab,description,is_active)    
-    return render_template('teste.html',mensagem=lab)
+    return render_template('cadastro_lab.html',mensagem=lab)
 
 @app.route('/submit/read_labs')
 def submit_read_labs():
     lista_labs = database.show_all_labs()
-    view_lista_labs =[]
+    ativo =[]
+    for i in lista_labs:
+        if i == 1:
+            ativo.append("ativo")
+        else:
+            ativo.append("reservado")
     print(lista_labs)
-    return render_template('consultar_labs.html',mensagem=lista_labs)
+    return render_template('consultar_labs.html',mensagem=lista_labs,ativo=ativo)
 
 @app.route('/submit/update_lab', methods=['POST'])
 def submit_update_lab():
@@ -219,7 +224,7 @@ def submit_update_lab():
         if id == item[2]:            
             id=item[0]
     database.update_lab(field,name,id)
-    return render_template('teste.html',mensagem=name)
+    return render_template('update_labs.html',mensagem=name)
 
 @app.route('/submit/delete_labs', methods=['POST'])
 def submit_delete_labs():
@@ -227,7 +232,7 @@ def submit_delete_labs():
     print(id)
     lista = database.show_all()    
     database.delete_lab(id)
-    return render_template('teste.html',mensagem=id)
+    return render_template('desativar_lab.html',mensagem=id)
 #Reserva LAB
 @app.route('/read_labs_byuser')
 def submit_read_labs_byuser():
