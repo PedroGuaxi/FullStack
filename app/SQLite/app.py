@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__,template_folder='../template', static_folder='../static')
 user_name_now =''
-
+user_id =''
 
 @app.route('/')
 def index():
@@ -14,18 +14,24 @@ def index():
 @app.route('/painel_admin', methods=['POST'] )
 def painel_admin():
     users = database.show_all()
+    lista_users= database.show_users()
     name = request.form['name']
     global user_name_now
+    global user_id
     user_name_now = name
+    for i in lista_users:
+        if i[1] == user_name_now:
+            user_id= i[0]
     password = request.form['password']
     for item in users:
         if item[1] == name and item[4] == password:
-            user = open("user.txt", "w")
-            user.write(str(item[0]))
-            user.close()
-            return render_template('painel.html')
-        else:
-            return render_template('index.html')
+            if name == "Alex Pereira":
+                print("Contemplem o magoooo")
+                return render_template('painel.html')                
+            else:
+                return render_template('painel_user.html')
+    return render_template('index.html')
+            
 
 @app.route('/cadastro')
 def cadastro(): 
@@ -226,22 +232,26 @@ def reservar_labs():
     print("Lista de labs:\n", lista_labs)
     print("Lista de reservas:\n", lista_reservas)
 
-    return render_template('read_labs_byuser.html',mensagem=lista_labs)
-@app.route('/read_labs_byuser')
+    return render_template('reservar_labs.html',mensagem=lista_labs)
+@app.route('/submit/read_labs_byuser')
 def submit_read_labs_byuser():
-    lista_reservas = database.show_reserva()
-    view_lista_labs =[]
-    print("Lista de reservas:\n", lista_reservas)
-    return render_template('read_labs_byuser.html',mensagem=lista_reservas)
+    global user_id
+    lista_reservas = database.show_all_reserva_byuser(str(user_id))
+    lista_labs= database.show_all_labs()
+    lista_byuser =[]
+    for i in lista_reservas:
+        for j in lista_labs:
+            if j[0] == i[2]:
+                if j[2] not in lista_byuser:
+                    lista_byuser.append(j[2])
+        
+    return render_template('read_labs_byuser.html',mensagem=lista_byuser)
+
 
 @app.route('/submit/reserva', methods=['POST'])
 def reserva():
     global user_name_now
-    user_id =''
-    lista_users= database.show_users()
-    for i in lista_users:
-        if i[1] == user_name_now:
-            user_id= i[0]
+    global user_id
     lab_id = request.form['id']
     boleto = "12345678"
     data_reserva = request.form['date']
@@ -268,7 +278,7 @@ def reserva():
     else:
         return print("erro")
     
-    return render_template('read_labs_byuser.html')
+    return render_template('painel_user.html')
 
 
 

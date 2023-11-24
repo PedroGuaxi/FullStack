@@ -162,6 +162,19 @@ def show_all_labs_inactive():
   conection.close()
   return items
 
+def show_all_reserva_byuser(id):
+  #conection = sqlite3.connect(':memory:')
+  conection = sqlite3.connect('LabProject')
+  #create a cursor
+  cursor = conection.cursor()
+  #query the database
+  cursor.execute("SELECT rowid, * FROM reserva WHERE user_id=(?)",id)
+  items = cursor.fetchall()
+  #commit command show all users
+  conection.commit()
+  #close our connection
+  conection.close()
+  return items
 
 def update_lab(field,name,id):
   #conection = sqlite3.connect(':memory:')
