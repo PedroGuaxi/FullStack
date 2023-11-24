@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, initial-scale=1.0, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
+
+    <title>Deletar Usuário</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <!-- ***** Logo Start ***** -->
+        <a href="index.html" class="logo">
+          <img src="../assets/images/lab.png" alt="" />
+        </a>
+        <!-- ***** Logo End ***** -->
+        <!-- ***** Menu Start ***** -->
+        <ul class="nav">
+          <li><a href="index.html" class="button">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="disable-container">
+        <h1>Desativar Lab</h1>
+        <form action="/submit/unable_labs" method="post">
+          <div class="dual">
+            <div class="d">
+              <label for="id"
+                ><h4><em>Qual o lab deseja desativar?</em></h4></label
+              >
+              <select id="id" name="id">
+                {% for item in mensagem %}
+                <option value="{{item[0]}}">{{ item[2] }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <button type="submit">Desativar</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

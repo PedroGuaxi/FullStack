@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, initial-scale=1.0, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Lab Scheduale</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico" />
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css" />
+   <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <!-- ***** Logo Start ***** -->
+        <a href="/" class="logo">
+          <img src="../assets/images/lab.png" alt="" />
+        </a>
+        <!-- ***** Logo End ***** -->
+        <!-- ***** Menu Start ***** -->
+        <ul class="nav">
+          <li><a href="" class="button">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="login-container">
+        <h1>Login</h1>
+        <form id="meuFormulario" action="/painel_admin" method="post">
+          <label for="name"
+            ><h4><em>Nome de Usuário:</em></h4></label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Digite seu nome de usuário"
+            required
+          />
+
+          <label for="password"
+            ><h4><em>Senha:</em></h4></label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required
+          />
+
+          <button type="submit" onclick="enviarFormulario()">Entrar</button>
+          <p><a href="/cadastro">Não tem conta? Cadastre-se</a></p>
+        </form>
+      </div>
+    </div>
+    <script>
+      function enviarFormulario() {
+        var formulario = document.getElementById('meuFormulario')
+        formulario.submit() // Envie o formulário quando o botão for clicado
+      }
+    </script>
+  </body>
+</html>
