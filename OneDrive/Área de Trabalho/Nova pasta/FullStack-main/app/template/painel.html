@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, initial-scale=1.0, shrink-to-fit=no"
+    />
+
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
+
+    <title>Painel Admin</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <!-- ***** Logo Start ***** -->
+        <a href="/" class="logo">
+          <img src="../assets/images/lab.png" alt="" />
+        </a>
+        <!-- ***** Logo End ***** -->
+        <!-- ***** Menu Start ***** -->
+        <ul class="nav">
+          <li><a href="/" class="button">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="user-container">
+        <h1>Opções USER</h1>
+        <form action="/cadastro">
+          <button type="submit">Criar usuarío</button>
+        </form>
+        <form action="/submit/read_users">
+          <button type="submit">Consultar usuaríos</button>
+        </form>
+        <form action="/update_users">
+          <button type="submit">Alterar dados do usuarío</button>
+        </form>
+        <form action="/delete_users">
+          <button type="submit">Deletar usuarío</button>
+        </form>
+        <form action="/unable_users">
+          <button type="submit">Desativar usuarío</button>
+        </form>
+        <form action="/enable_users">
+          <button type="submit">Reativar usuarío</button>
+        </form>
+      </div>
+
+      <div class="lab-container">
+        <h1>Opções LAB</h1>
+        <form action="/cadastro/lab">
+          <button type="submit">Criar laboratório</button>
+        </form>
+        <form action="/submit/read_labs">
+          <button type="submit">Consultar laboratório</button>
+        </form>
+        <form action="/update_labs">
+          <button type="submit">Alterar dados do laboratório</button>
+        </form>
+        <form action="/delete_labs">
+          <button type="submit">Deletar laboratório</button>
+        </form>
+        <form action="/unable_labs">
+          <button type="submit">Desativar laboratório</button>
+        </form>
+        <form action="/enable_labs">
+          <button type="submit">Reativar laboratório</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
