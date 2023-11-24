@@ -41,6 +41,20 @@ def show_reserva():
   #close our connection
   conection.close()
   return items
+def show_reserva_unique():
+  #conection = sqlite3.connect(':memory:')
+  conection = sqlite3.connect('LabProject')
+  #create a cursor
+  cursor = conection.cursor()
+  #query the database
+  cursor.execute("SELECT DISTINCT lab_id FROM reserva")
+  items = cursor.fetchall()
+  print(items)
+  #commit command show all users
+  conection.commit()
+  #close our connection
+  conection.close()
+  return items
 def show_users():
   #conection = sqlite3.connect(':memory:')
   conection = sqlite3.connect('LabProject')
@@ -146,7 +160,19 @@ def show_all_labs():
   #close our connection
   conection.close()
   return items
-
+def show_id_labs():
+  #conection = sqlite3.connect(':memory:')
+  conection = sqlite3.connect('LabProject')
+  #create a cursor
+  cursor = conection.cursor()
+  #query the database
+  cursor.execute("SELECT rowid FROM lab WHERE is_active=1")
+  items = cursor.fetchall()
+  #commit command show all users
+  conection.commit()
+  #close our connection
+  conection.close()
+  return items
 
 def show_all_labs_inactive():
   #conection = sqlite3.connect(':memory:')

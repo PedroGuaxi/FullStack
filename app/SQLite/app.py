@@ -193,15 +193,18 @@ def submit_cadastro_lab():
 
 @app.route('/submit/read_labs')
 def submit_read_labs():
-    lista_labs = database.show_all_labs()
+    lista_all_labs= database.show_all_labs()
+    lista_labs = database.show_id_labs()
+    lista_reservas = database.show_reserva_unique()
+    print("Lista de reservar:\n",lista_reservas)
+    print("Lista de reservar:\n",lista_labs)
     ativo =[]
-    for i in lista_labs:
-        if i == 1:
-            ativo.append("ativo")
+    for i in lista_labs :
+        if i in lista_reservas:
+            ativo.append("Reservado")
         else:
-            ativo.append("reservado")
-    print(lista_labs)
-    return render_template('consultar_labs.html',mensagem=lista_labs,ativo=ativo)
+            ativo.append("Não reservado")
+    return render_template('consultar_labs.html',mensagem=lista_all_labs,ativo=ativo)
 
 @app.route('/submit/update_lab', methods=['POST'])
 def submit_update_lab():
